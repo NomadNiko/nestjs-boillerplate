@@ -41,8 +41,6 @@ export default [
       '@typescript-eslint/explicit-function-return-type': 'off',
       '@typescript-eslint/explicit-module-boundary-types': 'off',
       '@typescript-eslint/no-explicit-any': 'off',
-      'no-unused-vars': 'off',
-      '@typescript-eslint/no-unused-vars': ['error'],
       'require-await': 'off',
       '@typescript-eslint/require-await': 'error',
       '@typescript-eslint/no-floating-promises': 'error',
