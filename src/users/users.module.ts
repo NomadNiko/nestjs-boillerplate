@@ -8,10 +8,7 @@ import { RelationalUserPersistenceModule } from './infrastructure/persistence/re
 import { DatabaseConfig } from '../database/config/database-config.type';
 import databaseConfig from '../database/config/database.config';
 import { FilesModule } from '../files/files.module';
-import { UserCreateService } from './services/user-create.service';
-import { UserReadService } from './services/user-read.service';
-import { UserUpdateService } from './services/user-update.service';
-import { UserDeleteService } from './services/user-delete.service';
+import { VendorModule } from '../vendors/vendor.module';
 
 // <database-block>
 const infrastructurePersistenceModule = (databaseConfig() as DatabaseConfig)
@@ -21,15 +18,14 @@ const infrastructurePersistenceModule = (databaseConfig() as DatabaseConfig)
 // </database-block>
 
 @Module({
-  imports: [infrastructurePersistenceModule, FilesModule],
-  controllers: [UsersController],
-  providers: [
-    UserCreateService,
-    UserReadService,
-    UserUpdateService,
-    UserDeleteService,
-    UsersService,
+  imports: [
+    // import modules, etc.
+    infrastructurePersistenceModule,
+    FilesModule,
+    VendorModule, 
   ],
+  controllers: [UsersController],
+  providers: [UsersService],
   exports: [UsersService, infrastructurePersistenceModule],
 })
 export class UsersModule {}

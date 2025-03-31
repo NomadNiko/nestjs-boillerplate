@@ -1,12 +1,10 @@
-import ms from 'ms';
-
 export type AuthConfig = {
   secret?: string;
-  expires?: ms.StringValue;
+  expires?: string;
   refreshSecret?: string;
-  refreshExpires?: ms.StringValue;
+  refreshExpires?: string;
   forgotSecret?: string;
-  forgotExpires?: ms.StringValue;
+  forgotExpires?: string;
   confirmEmailSecret?: string;
-  confirmEmailExpires?: ms.StringValue;
+  confirmEmailExpires?: string;
 };

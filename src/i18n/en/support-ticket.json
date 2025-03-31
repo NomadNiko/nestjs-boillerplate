@@ -1,0 +1,25 @@
+{
+  "created": {
+    "subject": "New Support Ticket Created: {ticketId}",
+    "heading": "Support Ticket Created",
+    "message": "Your support ticket has been created successfully."
+  },
+  "updated": {
+    "subject": "Update to Your Support Ticket: {ticketId}",
+    "heading": "Support Ticket Updated",
+    "message": "Your support ticket has been updated."
+  },
+  "assigned": {
+    "subject": "Your Support Ticket Has Been Assigned: {ticketId}",
+    "heading": "Support Ticket Assigned",
+    "message": "Your support ticket has been assigned to {assigneeName}."
+  },
+  "resolved": {
+    "subject": "Your Support Ticket Has Been Resolved: {ticketId}",
+    "heading": "Support Ticket Resolved",
+    "message": "Your support ticket has been resolved."
+  },
+  "viewTicket": "View Your Ticket",
+  "ticketInfo": "Ticket Information",
+  "latestUpdate": "Latest Update"
+}

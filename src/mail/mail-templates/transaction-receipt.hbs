@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang='en'>
+  <head>
+    <meta charset='UTF-8' />
+    <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+    <meta name="color-scheme" content="light dark">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap" rel="stylesheet">
+  </head>
+  <body style='margin:0;font-family:"Orbitron",arial,sans-serif;background-color:#1E293B;color:#FFFFFF;padding:20px'>
+    <!--[if mso]>
+    <style type="text/css">
+      .fallback-font {
+        font-family: Arial, sans-serif !important;
+      }
+    </style>
+    <![endif]-->
+    
+    <table cellpadding="0" cellspacing="0" style='border:0;width:100%;max-width:600px;margin:0 auto;background-color:#1C263F;border-radius:8px;border:1px solid rgba(255, 255, 255, 0.1);box-shadow:0 8px 32px rgba(0, 0, 0, 0.2)'>
+      <tr>
+        <td style='text-align:center;padding:40px'>
+          <img src="https://ixplor-profile-s3-bucket-02.s3.us-east-2.amazonaws.com/d3a213ebe3ee97bad236a.png" alt="iXplor Logo" width="200" style="margin:0 auto;display:block" />
+        </td>
+      </tr>
+      <tr>
+        <td style='padding:0 40px;text-align:center'>
+          <h1 class="fallback-font" style='font-family:"Orbitron",Arial,sans-serif;font-size:48px;margin:0;color:#FFFFFF !important;font-weight:400'>
+            {{appName}}
+          </h1>
+        </td>
+      </tr>
+      <tr>
+        <td class="fallback-font" style='padding:30px 40px;color:#FFFFFF !important;font-size:16px;font-weight:400;text-align:center;line-height:1.5;font-family:"Orbitron",Arial,sans-serif'>
+          <p style="margin:0">Hello {{userName}},</p>
+          <p style="margin-top:15px">{{text1}}</p>
+          <p style="margin-top:10px">{{text2}}</p>
+        </td>
+      </tr>
+      
+      <!-- Receipt Details -->
+      <tr>
+        <td style='padding:10px 40px'>
+          <div style='background-color:#2C3B59;border-radius:8px;padding:20px;margin:10px 0'>
+            <table cellpadding="0" cellspacing="0" style="width:100%">
+              <tr>
+                <td style="padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.1)">
+                  <span style="font-weight:bold;color:#A3B3D3">Order Number:</span>
+                </td>
+                <td style="padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.1);text-align:right">
+                  #{{formattedTransactionId}}
+                </td>
+              </tr>
+              <tr>
+                <td style="padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.1)">
+                  <span style="font-weight:bold;color:#A3B3D3">Purchase Date:</span>
+                </td>
+                <td style="padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.1);text-align:right">
+                  {{purchaseDate}}
+                </td>
+              </tr>
+              <tr>
+                <td style="padding:8px 0">
+                  <span style="font-weight:bold;color:#A3B3D3">Total Amount:</span>
+                </td>
+                <td style="padding:8px 0;text-align:right">
+                  ${{amount}}
+                </td>
+              </tr>
+            </table>
+          </div>
+        </td>
+      </tr>
+      
+      <!-- Items Purchased -->
+      <tr>
+        <td style='padding:10px 40px'>
+          <h2 style='margin:20px 0 15px 0;color:#FFFFFF;font-size:20px;text-align:center'>Items Purchased</h2>
+          <div style='background-color:#2C3B59;border-radius:8px;padding:5px 15px 15px;margin-bottom:20px'>
+            <table cellpadding="0" cellspacing="0" style="width:100%">
+              <thead>
+                <tr>
+                  <th style="text-align:left;padding:15px 5px 10px;color:#A3B3D3;font-size:14px;border-bottom:1px solid rgba(255,255,255,0.2)">Item</th>
+                  <th style="text-align:left;padding:15px 5px 10px;color:#A3B3D3;font-size:14px;border-bottom:1px solid rgba(255,255,255,0.2)">Date</th>
+                  <th style="text-align:left;padding:15px 5px 10px;color:#A3B3D3;font-size:14px;border-bottom:1px solid rgba(255,255,255,0.2)">Time</th>
+                  <th style="text-align:right;padding:15px 5px 10px;color:#A3B3D3;font-size:14px;border-bottom:1px solid rgba(255,255,255,0.2)">Price</th>
+                  <th style="text-align:center;padding:15px 5px 10px;color:#A3B3D3;font-size:14px;border-bottom:1px solid rgba(255,255,255,0.2)">Qty</th>
+                  <th style="text-align:right;padding:15px 5px 10px;color:#A3B3D3;font-size:14px;border-bottom:1px solid rgba(255,255,255,0.2)">Total</th>
+                </tr>
+              </thead>
+              <tbody>
+                {{#each productItems}}
+                <tr>
+                  <td style="padding:12px 5px;border-bottom:1px solid rgba(255,255,255,0.1);font-size:14px">{{this.productName}}</td>
+                  <td style="padding:12px 5px;border-bottom:1px solid rgba(255,255,255,0.1);font-size:14px">{{this.date}}</td>
+                  <td style="padding:12px 5px;border-bottom:1px solid rgba(255,255,255,0.1);font-size:14px">{{this.time}}</td>
+                  <td style="padding:12px 5px;border-bottom:1px solid rgba(255,255,255,0.1);font-size:14px;text-align:right">${{this.formattedPrice}}</td>
+                  <td style="padding:12px 5px;border-bottom:1px solid rgba(255,255,255,0.1);font-size:14px;text-align:center">{{this.quantity}}</td>
+                  <td style="padding:12px 5px;border-bottom:1px solid rgba(255,255,255,0.1);font-size:14px;text-align:right">${{this.formattedTotal}}</td>
+                </tr>
+                {{/each}}
+                <tr>
+                  <td colspan="5" style="padding:15px 5px 5px;text-align:right;font-weight:bold;color:#A3B3D3">Total:</td>
+                  <td style="padding:15px 5px 5px;text-align:right;font-weight:bold">${{amount}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </td>
+      </tr>
+      
+      <!-- Stripe Receipt Link -->
+      {{#if stripeReceiptUrl}}
+      <tr>
+        <td style='text-align:center;padding:10px 40px'>
+          <p style="margin:10px 0;color:#A3B3D3;font-size:14px">You can also view your official payment receipt from Stripe:</p>
+          <a href='{{stripeReceiptUrl}}' style='display:inline-block;padding:12px 24px;background:#635bff;text-decoration:none;color:#FFFFFF !important;border-radius:8px;font-weight:500;box-shadow:0 4px 10px rgba(0,0,0,0.1);margin:10px 0'>
+            View Stripe Receipt
+          </a>
+        </td>
+      </tr>
+      {{/if}}
+      
+      <!-- Thank You Message -->
+      <tr>
+        <td class="fallback-font" style='padding:20px 40px 30px;color:#FFFFFF !important;font-size:16px;font-weight:400;text-align:center;line-height:1.5;font-family:"Orbitron",Arial,sans-serif'>
+          <p style="margin:0">{{text3}}</p>
+          <a href='{{ixplorDashUrl}}' style='display:inline-block;padding:12px 24px;background:#635bff;text-decoration:none;color:#FFFFFF !important;border-radius:8px;font-weight:500;box-shadow:0 4px 10px rgba(0,0,0,0.1);margin:10px 0'>
+            iXplor Dashboard
+          </a>
+          <p style="margin-top:15px">Thank you for choosing {{appName}}.<br>>We look forward to serving you again soon!</p>
+        </td>
+      </tr>
+      
+      <!-- Footer -->
+      <tr>
+        <td style="text-align:center;padding:20px;border-top:1px solid rgba(255,255,255,0.1);font-size:12px;color:#A3B3D3">
+          <p style="margin:0">&copy; {{currentYear}} {{appName}}. All rights reserved.</p>
+          <p style="margin-top:10px">If you have any questions about your order, please contact our support team.</p>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang='en'>
+  <head>
+    <meta charset='UTF-8' />
+    <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+    <meta name="color-scheme" content="light dark">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap" rel="stylesheet">
+  </head>
+  <body style='margin:0;font-family:"Orbitron",arial,sans-serif;background-color:#1E293B;color:#FFFFFF;padding:20px'>
+    <!--[if mso]>
+    <style type="text/css">
+      .fallback-font {
+        font-family: Arial, sans-serif !important;
+      }
+    </style>
+    <![endif]-->
+    
+    <table cellpadding="0" cellspacing="0" style='border:0;width:100%;max-width:600px;margin:0 auto;background-color:#1C263F;border-radius:8px;border:1px solid rgba(255, 255, 255, 0.1);box-shadow:0 8px 32px rgba(0, 0, 0, 0.2)'>
+      <tr>
+        <td style='text-align:center;padding:40px'>
+          <img src="https://ixplor-profile-s3-bucket-02.s3.us-east-2.amazonaws.com/d3a213ebe3ee97bad236a.png" alt="iXplor Logo" width="200" style="margin:0 auto;display:block" />
+        </td>
+      </tr>
+      <tr>
+        <td style='padding:0 40px;text-align:center'>
+          <h1 class="fallback-font" style='font-family:"Orbitron",Arial,sans-serif;font-size:48px;margin:0;color:#FFFFFF !important;font-weight:400'>
+            {{app_name}}
+          </h1>
+        </td>
+      </tr>
+      <tr>
+        <td class="fallback-font" style='padding:30px 40px;color:#FFFFFF !important;font-size:16px;font-weight:400;text-align:center;line-height:1.5;font-family:"Orbitron",Arial,sans-serif'>
+          Thank you for your purchase!<br />
+          Here are your ticket details:
+        </td>
+      </tr>
+
+      {{#each vendors}}
+      <tr>
+        <td style='padding:20px 40px'>
+          <div style='background-color:#2C3B59;border-radius:8px;padding:20px;margin-bottom:20px'>
+            <h2 style='margin:0 0 15px 0;color:#FFFFFF;font-size:20px'>{{vendorName}}</h2>
+            <p style='margin:0 0 15px 0;color:#A3B3D3;font-size:14px'>Contact: {{vendorEmail}}</p>
+            
+            {{#each tickets}}
+            <div style='border-top:1px solid rgba(255,255,255,0.1);padding:15px 0'>
+              <p style='margin:0;color:#FFFFFF'>
+                <strong>Ticket ID:</strong> {{ticketId}}<br>
+                <strong>{{productName}}</strong><br>
+                Amount: ${{price}}
+              </p>
+            </div>
+            {{/each}}
+          </div>
+        </td>
+      </tr>
+      {{/each}}
+
+      <tr>
+        <td style='padding:20px 40px;text-align:right'>
+          <p style='margin:0;font-size:20px;color:#FFFFFF'>
+            <strong>Total Amount:</strong> ${{totalAmount}}
+          </p>
+        </td>
+      </tr>
+
+      <tr>
+        <td class="fallback-font" style='padding:30px 40px;color:#FFFFFF !important;font-size:16px;font-weight:400;text-align:center;line-height:1.5;font-family:"Orbitron",Arial,sans-serif'>
+          Thank you for choosing iXplor for your adventure!<br>
+          We hope you have an amazing experience.
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>

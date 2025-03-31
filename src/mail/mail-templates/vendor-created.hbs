@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+    <meta charset='UTF-8' />
+    <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+    <meta name="color-scheme" content="light dark">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap" rel="stylesheet">
+</head>
+
+<body style='margin:0;font-family:"Orbitron",arial,sans-serif;background-color:#1E293B;color:#FFFFFF;padding:20px'>
+    <!--[if mso]>
+    <style type="text/css">
+      .fallback-font {
+        font-family: Arial, sans-serif !important;
+      }
+    </style>
+    <![endif]-->
+
+    <table cellpadding="0" cellspacing="0"
+        style='border:0;width:100%;max-width:600px;margin:0 auto;background-color:#1C263F;border-radius:8px;border:1px solid rgba(255, 255, 255, 0.1);box-shadow:0 8px 32px rgba(0, 0, 0, 0.2)'>
+        <tr>
+            <td style='text-align:center;padding:40px'>
+                <img src="https://ixplor-profile-s3-bucket-02.s3.us-east-2.amazonaws.com/d3a213ebe3ee97bad236a.png"
+                    alt="iXplor Logo" width="200" style="margin:0 auto;display:block" />
+            </td>
+        </tr>
+        <tr>
+            <td style='padding:0 40px;text-align:center'>
+                <h1 class="fallback-font"
+                    style='font-family:"Orbitron",Arial,sans-serif;font-size:48px;margin:0;color:#FFFFFF !important;font-weight:400'>
+                    Vendor Created
+                </h1>
+            </td>
+        </tr>
+        <tr>
+            <td class="fallback-font"
+                style='padding:30px 40px;color:#FFFFFF !important;font-size:16px;font-weight:400;text-align:center;line-height:1.5;font-family:"Orbitron",Arial,sans-serif'>
+                <p style="margin:0">Hello {{userName}},</p>
+                <p style="margin-top:15px">Your vendor profile <strong>{{vendorName}}</strong> has been successfully
+                    created. Follow these steps to complete your onboarding process:</p>
+            </td>
+        </tr>
+
+        <!-- Onboarding Steps -->
+        <tr>
+            <td style='padding:10px 40px'>
+                <!-- Step 1: Vendor Profile -->
+                <div
+                    style='background-color:#2C3B59;border-radius:8px;padding:15px;margin-bottom:15px;display:flex;align-items:center'>
+                    <div
+                        style='width:30px;height:30px;min-width:30px;border-radius:50%;background-color:#10B981;color:#FFFFFF;display:flex;align-items:center;justify-content:center;margin-right:15px'>
+                        <span style='font-weight:bold'>✓</span>
+                    </div>
+                    <div>
+                        <p style='margin:0;font-weight:bold;color:#FFFFFF'>Vendor Profile Created</p>
+                        <p style='margin:5px 0 0;font-size:14px;color:#A3B3D3'>Your vendor profile has been successfully
+                            created.</p>
+                    </div>
+                </div>
+
+                <!-- Step 2: Create Templates -->
+                <div
+                    style='background-color:#2C3B59;border-radius:8px;padding:15px;margin-bottom:15px;display:flex;align-items:center'>
+                    <div
+                        style='width:30px;height:30px;min-width:30px;border-radius:50%;background-color:{{#if onboardingSteps.hasTemplates}}#10B981{{else}}#4B5563{{/if}};color:#FFFFFF;display:flex;align-items:center;justify-content:center;margin-right:15px'>
+                        {{#if onboardingSteps.hasTemplates}}✓{{else}}2{{/if}}
+                    </div>
+                    <div>
+                        <p style='margin:0;font-weight:bold;color:#FFFFFF'>Create Product Templates</p>
+                        <p style='margin:5px 0 0;font-size:14px;color:#A3B3D3'>Create templates for your products,
+                            activities or services.</p>
+                    </div>
+                </div>
+
+                <!-- Step 3: Generate Items -->
+                <div
+                    style='background-color:#2C3B59;border-radius:8px;padding:15px;margin-bottom:15px;display:flex;align-items:center'>
+                    <div
+                        style='width:30px;height:30px;min-width:30px;border-radius:50%;background-color:{{#if onboardingSteps.hasProducts}}#10B981{{else}}#4B5563{{/if}};color:#FFFFFF;display:flex;align-items:center;justify-content:center;margin-right:15px'>
+                        {{#if onboardingSteps.hasProducts}}✓{{else}}3{{/if}}
+                    </div>
+                    <div>
+                        <p style='margin:0;font-weight:bold;color:#FFFFFF'>Generate Product Items</p>
+                        <p style='margin:5px 0 0;font-size:14px;color:#A3B3D3'>Convert your templates into bookable
+                            items by setting dates, times, and availability.</p>
+                    </div>
+                </div>
+
+                <!-- Step 4: Stripe Connect -->
+                <div
+                    style='background-color:#2C3B59;border-radius:8px;padding:15px;margin-bottom:15px;display:flex;align-items:center'>
+                    <div
+                        style='width:30px;height:30px;min-width:30px;border-radius:50%;background-color:{{#if onboardingSteps.stripeComplete}}#10B981{{else}}#4B5563{{/if}};color:#FFFFFF;display:flex;align-items:center;justify-content:center;margin-right:15px'>
+                        {{#if onboardingSteps.stripeComplete}}✓{{else}}4{{/if}}
+                    </div>
+                    <div>
+                        <p style='margin:0;font-weight:bold;color:#FFFFFF'>Connect Payment Processing</p>
+                        <p style='margin:5px 0 0;font-size:14px;color:#A3B3D3'>Set up your Stripe account to accept
+                            payments and manage your earnings securely.</p>
+                    </div>
+                </div>
+
+                <!-- Step 5: Final Approval -->
+                <div
+                    style='background-color:#2C3B59;border-radius:8px;padding:15px;margin-bottom:15px;display:flex;align-items:center'>
+                    <div
+                        style='width:30px;height:30px;min-width:30px;border-radius:50%;background-color:{{#if onboardingSteps.approved}}#10B981{{else}}#4B5563{{/if}};color:#FFFFFF;display:flex;align-items:center;justify-content:center;margin-right:15px'>
+                        {{#if onboardingSteps.approved}}✓{{else}}5{{/if}}
+                    </div>
+                    <div>
+                        <p style='margin:0;font-weight:bold;color:#FFFFFF'>Final Approval</p>
+                        <p style='margin:5px 0 0;font-size:14px;color:#A3B3D3'>Once all steps are completed, your
+                            profile will be reviewed for final approval.</p>
+                    </div>
+                </div>
+            </td>
+        </tr>
+
+        <tr>
+            <td style='text-align:center;padding:20px 40px'>
+                <a href='{{vendorStatusUrl}}'
+                    style='display:inline-block;padding:16px 32px;background:#1E40AF;text-decoration:none;color:#FFFFFF !important;border-radius:8px;font-weight:500;box-shadow:0 4px 10px rgba(0,0,0,0.1)'>
+                    Go to Vendor Dashboard
+                </a>
+            </td>
+        </tr>
+
+        <tr>
+            <td
+                style="text-align:center;padding:20px;border-top:1px solid rgba(255,255,255,0.1);font-size:12px;color:#A3B3D3">
+                <p style="margin:0">&copy; {{currentYear}} iXplor. All rights reserved.</p>
+                <p style="margin-top:10px">If you have any questions, please contact our support team.</p>
+            </td>
+        </tr>
+    </table>
+</body>
+
+</html>

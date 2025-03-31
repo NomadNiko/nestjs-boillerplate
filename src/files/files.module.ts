@@ -1,7 +1,4 @@
-import {
-  // common
-  Module,
-} from '@nestjs/common';
+import { Module } from '@nestjs/common';
 
 import { DocumentFilePersistenceModule } from './infrastructure/persistence/document/document-persistence.module';
 import { RelationalFilePersistenceModule } from './infrastructure/persistence/relational/relational-persistence.module';
@@ -29,11 +26,7 @@ const infrastructureUploaderModule =
       : FilesS3PresignedModule;
 
 @Module({
-  imports: [
-    // import modules, etc.
-    infrastructurePersistenceModule,
-    infrastructureUploaderModule,
-  ],
+  imports: [infrastructurePersistenceModule, infrastructureUploaderModule],
   providers: [FilesService],
   exports: [FilesService, infrastructurePersistenceModule],
 })

@@ -70,6 +70,13 @@ export class UserSchemaClass extends EntityDocumentHelper {
 
   @Prop()
   deletedAt: Date;
+
+  @Prop({ 
+    type: [String],
+    default: [] 
+  })
+  vendorProfileIds: string[];
+  
 }
 
 export const UserSchema = SchemaFactory.createForClass(UserSchemaClass);

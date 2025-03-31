@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+    <meta charset='UTF-8' />
+    <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+    <meta name="color-scheme" content="light dark">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap" rel="stylesheet">
+</head>
+
+<body style='margin:0;font-family:"Orbitron",arial,sans-serif;background-color:#1E293B;color:#FFFFFF;padding:20px'>
+    <!--[if mso]>
+    <style type="text/css">
+      .fallback-font {
+        font-family: Arial, sans-serif !important;
+      }
+    </style>
+    <![endif]-->
+
+    <table cellpadding="0" cellspacing="0"
+        style='border:0;width:100%;max-width:600px;margin:0 auto;background-color:#1C263F;border-radius:8px;border:1px solid rgba(255, 255, 255, 0.1);box-shadow:0 8px 32px rgba(0, 0, 0, 0.2)'>
+        <tr>
+            <td style='text-align:center;padding:40px'>
+                <img src="https://ixplor-profile-s3-bucket-02.s3.us-east-2.amazonaws.com/d3a213ebe3ee97bad236a.png"
+                    alt="iXplor Logo" width="200" style="margin:0 auto;display:block" />
+            </td>
+        </tr>
+        <tr>
+            <td style='padding:0 40px;text-align:center'>
+                <h1 class="fallback-font"
+                    style='font-family:"Orbitron",Arial,sans-serif;font-size:48px;margin:0;color:#FFFFFF !important;font-weight:400'>
+                    Congratulations!
+                </h1>
+            </td>
+        </tr>
+        <tr>
+            <td class="fallback-font"
+                style='padding:30px 40px;color:#FFFFFF !important;font-size:16px;font-weight:400;text-align:center;line-height:1.5;font-family:"Orbitron",Arial,sans-serif'>
+                <p style="margin:0">Hello {{userName}},</p>
+                <p style="margin-top:15px">Great news! Your vendor <strong>{{vendorName}}</strong> has been approved and
+                    is now live on iXplor.</p>
+                <p style="margin-top:15px">Your products are now visible to customers and available for booking. You're
+                    all set to start receiving orders and growing your business on our platform.</p>
+            </td>
+        </tr>
+
+        <tr>
+            <td class="fallback-font"
+                style='padding:30px 40px;color:#FFFFFF !important;font-size:16px;font-weight:400;text-align:left;line-height:1.5;font-family:"Orbitron",Arial,sans-serif'>
+                <h2 style="margin:0 0 15px;font-size:20px;text-align:center">Next Steps</h2>
+
+                <div style="margin-bottom:15px;display:flex;align-items:flex-start">
+                    <div style="width:30px;min-width:30px;margin-right:10px;text-align:center">1.</div>
+                    <div>
+                        <p style="margin:0"><strong>Monitor your dashboard</strong> regularly to stay on top of bookings
+                            and updates.</p>
+                    </div>
+                </div>
+
+                <div style="margin-bottom:15px;display:flex;align-items:flex-start">
+                    <div style="width:30px;min-width:30px;margin-right:10px;text-align:center">2.</div>
+                    <div>
+                        <p style="margin:0"><strong>Add more products</strong> to expand your offerings and attract more
+                            customers.</p>
+                    </div>
+                </div>
+
+                <div style="margin-bottom:15px;display:flex;align-items:flex-start">
+                    <div style="width:30px;min-width:30px;margin-right:10px;text-align:center">3.</div>
+                    <div>
+                        <p style="margin:0"><strong>Optimize your product descriptions and photos</strong> to make your
+                            listings stand out.</p>
+                    </div>
+                </div>
+            </td>
+        </tr>
+
+        <tr>
+            <td style='text-align:center;padding:20px 40px'>
+                <a href='{{vendorStatusUrl}}'
+                    style='display:inline-block;padding:16px 32px;background:#1E40AF;text-decoration:none;color:#FFFFFF !important;border-radius:8px;font-weight:500;box-shadow:0 4px 10px rgba(0,0,0,0.1)'>
+                    Go to Vendor Dashboard
+                </a>
+            </td>
+        </tr>
+
+        <tr>
+            <td
+                style="text-align:center;padding:20px;border-top:1px solid rgba(255,255,255,0.1);font-size:12px;color:#A3B3D3">
+                <p style="margin:0">&copy; {{currentYear}} iXplor. All rights reserved.</p>
+                <p style="margin-top:10px">If you have any questions, please contact our support team.</p>
+            </td>
+        </tr>
+    </table>
+</body>
+
+</html>

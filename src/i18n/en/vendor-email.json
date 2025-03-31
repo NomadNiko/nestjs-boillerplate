@@ -1,0 +1,57 @@
+{
+  "created": {
+    "subject": "Your iXplor Vendor Profile Has Been Created",
+    "text": "Your vendor profile has been created successfully on iXplor."
+  },
+  "stripeComplete": {
+    "subject": "Stripe Setup Complete for Your iXplor Vendor Account",
+    "text": "Your Stripe payment processing has been set up successfully."
+  },
+  "approved": {
+    "subject": "Congratulations! Your iXplor Vendor Account is Now Live",
+    "text": "Your vendor has been approved and is now live on iXplor."
+  },
+  "sale-notification": {
+    "subject": "New Sale Notification",
+    "newSaleMessage": "You have a new sale! A customer has purchased the following items from your inventory:",
+    "saleSummaryTitle": "Sale Summary",
+    "orderIdLabel": "Order ID",
+    "purchaseDateLabel": "Purchase Date",
+    "customerLabel": "Customer",
+    "purchasedItemsTitle": "Items Purchased",
+    "itemLabel": "Item",
+    "dateLabel": "Date",
+    "timeLabel": "Time",
+    "priceLabel": "Price",
+    "qtyLabel": "Qty",
+    "totalLabel": "Total",
+    "subtotalLabel": "Subtotal",
+    "financialSummaryTitle": "Financial Summary",
+    "platformFeeLabel": "Platform Fee",
+    "yourEarningsLabel": "Your Earnings",
+    "paymentReleaseMessage": "Funds will be available in your account once tickets are redeemed",
+    "vendorDashboardLabel": "Vendor Dashboard",
+    "ticketManagementLabel": "Ticket Management"
+  },
+  "common": {
+    "greeting": "Hello",
+    "signoff": "Thank you for choosing iXplor.",
+    "support": "If you have any questions, please contact our support team."
+  },
+  "steps": {
+    "profileCreated": "Vendor Profile Created",
+    "profileDescription": "Your vendor profile has been successfully created.",
+    "templates": "Create Product Templates",
+    "templatesDescription": "Create templates for your products, activities or services.",
+    "items": "Generate Product Items",
+    "itemsDescription": "Convert your templates into bookable items by setting dates, times, and availability.",
+    "stripe": "Connect Payment Processing",
+    "stripeDescription": "Set up your Stripe account to accept payments and manage your earnings securely.",
+    "approval": "Final Approval",
+    "approvalDescription": "Once all steps are completed, your profile will be reviewed for final approval."
+  },
+  "buttons": {
+    "viewStatus": "Go to Vendor Dashboard",
+    "viewDashboard": "Go to Vendor Dashboard"
+  }
+}

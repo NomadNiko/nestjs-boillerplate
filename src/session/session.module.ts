@@ -1,7 +1,4 @@
-import {
-  // common
-  Module,
-} from '@nestjs/common';
+import { Module } from '@nestjs/common';
 
 import { DocumentSessionPersistenceModule } from './infrastructure/persistence/document/document-persistence.module';
 import { RelationalSessionPersistenceModule } from './infrastructure/persistence/relational/relational-persistence.module';
