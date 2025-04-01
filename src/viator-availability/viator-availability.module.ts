@@ -1,3 +1,4 @@
+// src/viator-availability/viator-availability.module.ts
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ViatorApiModule } from '../viator-api/viator-api.module';

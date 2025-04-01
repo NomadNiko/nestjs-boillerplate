@@ -6,10 +6,13 @@ export type ViatorProductSchemaDocument =
 
 @Schema({
   timestamps: true,
-  strict: false, // Accept any fields from Viator API
+  strict: false,
   toJSON: {
     transform: (_, ret) => {
-      ret._id = ret._id.toString();
+      // Properly handle ObjectId conversion to string
+      if (ret._id) {
+        ret._id = ret._id.toString();
+      }
       delete ret.__v;
       return ret;
     },

@@ -1,3 +1,4 @@
+// src/viator-availability/viator-availability.controller.ts
 import { Controller, Post, Body, Logger } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiResponse, ApiBody } from '@nestjs/swagger';
 import { ViatorAvailabilityService } from './viator-availability.service';
@@ -26,9 +27,11 @@ export class ViatorAvailabilityController {
   async checkAvailability(
     @Body() request: AvailabilityCheckRequestDto,
   ): Promise<{ data: Record<string, unknown> }> {
-    const availability = await this.availabilityService.checkAvailability(
-      request,
+    this.logger.log(
+      `Checking availability for product: ${request.productCode}`,
     );
+    const availability =
+      await this.availabilityService.checkAvailability(request);
     return { data: availability };
   }
 }

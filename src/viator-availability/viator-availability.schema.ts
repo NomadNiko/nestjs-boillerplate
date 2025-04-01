@@ -1,3 +1,4 @@
+// src/viator-availability/viator-availability.schema.ts
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { HydratedDocument, now } from 'mongoose';
 

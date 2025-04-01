@@ -1,3 +1,5 @@
+// src/viator-product/viator-product.service.ts
+
 import { Injectable, Logger } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
@@ -29,7 +31,6 @@ export class ViatorProductService {
         `Searching products for destination: ${searchRequest.destination}`,
       );
 
-      // Build the request body for the Viator API
       const requestBody = {
         filtering: {
           destination: searchRequest.destination,
@@ -52,7 +53,7 @@ export class ViatorProductService {
         },
         currency: searchRequest.currency || 'USD',
       };
-      // Make the request to the Viator API
+
       const response =
         await this.viatorApiService.makeRequest<ProductSearchResponseDto>(
           '/products/search',
@@ -60,7 +61,6 @@ export class ViatorProductService {
           requestBody,
         );
 
-      // Cache products for future use
       if (response?.products?.length > 0) {
         await this.cacheProducts(response.products);
       }
@@ -76,28 +76,36 @@ export class ViatorProductService {
     productCode: string,
   ): Promise<Record<string, unknown> | null> {
     try {
-      // Try to get from cache first
       const cachedProduct = await this.productModel
         .findOne({ productCode })
         .lean();
+
       if (cachedProduct && this.isCacheValid(cachedProduct.lastRefreshed)) {
-        return cachedProduct;
+        return {
+          ...cachedProduct,
+          _id: cachedProduct._id?.toString(),
+        };
       }
 
-      // If not in cache or expired, fetch from API
       const response = await this.viatorApiService.makeRequest<
         Record<string, unknown>
       >(`/products/${productCode}`);
 
       if (response && response.productCode) {
-        // Cache the new data
-        await this.cacheProduct(response);
-        return response;
+        const savedProduct = await this.cacheProduct(response);
+        return savedProduct
+          ? {
+              ...response,
+              _id: savedProduct._id?.toString(),
+            }
+          : response;
       }
 
-      // If API request failed but we have expired cache, use it
       if (cachedProduct) {
-        return cachedProduct;
+        return {
+          ...cachedProduct,
+          _id: cachedProduct._id?.toString(),
+        };
       }
 
       return null;
@@ -121,29 +129,35 @@ export class ViatorProductService {
     }
   }
 
-  private async cacheProduct(product: Record<string, unknown>): Promise<void> {
+  private async cacheProduct(
+    product: Record<string, unknown>,
+  ): Promise<Record<string, unknown> | null> {
     try {
       if (!product.productCode) {
-        return;
+        return null;
       }
 
-      await this.productModel.updateOne(
-        { productCode: product.productCode },
-        {
-          $set: {
-            ...product,
-            lastRefreshed: new Date(),
+      const result = await this.productModel
+        .findOneAndUpdate(
+          { productCode: product.productCode },
+          {
+            $set: {
+              ...product,
+              lastRefreshed: new Date(),
+            },
           },
-        },
-        { upsert: true },
-      );
+          { upsert: true, new: true },
+        )
+        .lean();
+
+      return result;
     } catch (error) {
       this.logger.error(`Error caching product: ${error.message}`);
+      return null;
     }
   }
 
   private isCacheValid(lastRefreshed: Date): boolean {
-    // Cache is valid for 24 hours
     const oneDayAgo = new Date();
     oneDayAgo.setDate(oneDayAgo.getDate() - 1);
     return lastRefreshed > oneDayAgo;

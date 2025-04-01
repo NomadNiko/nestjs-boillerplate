@@ -1,3 +1,4 @@
+// src/viator-availability/viator-availability.service.ts
 import { Injectable, Logger } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
@@ -29,11 +30,26 @@ export class ViatorAvailabilityService {
         `Checking availability for product: ${request.productCode}`,
       );
 
+      // Parse dates properly
+      const startDate = request.startDate
+        ? new Date(request.startDate)
+        : undefined;
+      const endDate = request.endDate ? new Date(request.endDate) : undefined;
+
+      // Validate dates to ensure they're valid
+      if (startDate && isNaN(startDate.getTime())) {
+        throw new Error(`Invalid startDate: ${request.startDate}`);
+      }
+
+      if (endDate && isNaN(endDate.getTime())) {
+        throw new Error(`Invalid endDate: ${request.endDate}`);
+      }
+
       // Try to get from cache first
       const cachedAvailability = await this.getCachedAvailability(
         request.productCode,
-        new Date(request.startDate),
-        request.endDate ? new Date(request.endDate) : undefined,
+        startDate,
+        endDate,
       );
 
       if (
@@ -50,12 +66,14 @@ export class ViatorAvailabilityService {
 
       if (availability && availability.productCode) {
         // Cache the availability data
-        await this.cacheAvailability(
-          request.productCode,
-          new Date(request.startDate),
-          request.endDate ? new Date(request.endDate) : undefined,
-          availability,
-        );
+        if (startDate) {
+          await this.cacheAvailability(
+            request.productCode,
+            startDate,
+            endDate,
+            availability,
+          );
+        }
         return availability;
       }
 
@@ -84,19 +102,37 @@ export class ViatorAvailabilityService {
 
   private async getCachedAvailability(
     productCode: string,
-    startDate: Date,
+    startDate?: Date,
     endDate?: Date,
   ): Promise<ViatorAvailabilitySchemaDocument | null> {
     try {
+      if (!productCode) {
+        this.logger.warn(
+          'Cannot get cached availability: productCode is undefined',
+        );
+        return null;
+      }
+
+      // Validate dates
+      if (startDate && isNaN(startDate.getTime())) {
+        this.logger.warn(`Invalid startDate for cache lookup: ${startDate}`);
+        return null;
+      }
+
+      if (endDate && isNaN(endDate.getTime())) {
+        this.logger.warn(`Invalid endDate for cache lookup: ${endDate}`);
+        return null;
+      }
+
       const query: Record<string, unknown> = { productCode };
 
-      if (startDate) {
+      if (startDate && !isNaN(startDate.getTime())) {
         query.startDate = { $lte: startDate };
       }
 
-      if (endDate) {
+      if (endDate && !isNaN(endDate.getTime())) {
         query.endDate = { $gte: endDate };
-      } else {
+      } else if (startDate && !isNaN(startDate.getTime())) {
         query.endDate = { $gte: startDate };
       }
 
@@ -114,9 +150,24 @@ export class ViatorAvailabilityService {
     availability: Record<string, unknown>,
   ): Promise<void> {
     try {
+      if (!productCode) {
+        this.logger.warn('Cannot cache availability: productCode is undefined');
+        return;
+      }
+
+      // Validate dates
+      if (isNaN(startDate.getTime())) {
+        this.logger.warn(
+          `Cannot cache availability: invalid startDate ${startDate}`,
+        );
+        return;
+      }
+
       // If no end date provided, set it to 30 days after start date
-      const effectiveEndDate = endDate || new Date(startDate);
-      if (!endDate) {
+      const effectiveEndDate =
+        endDate && !isNaN(endDate.getTime()) ? endDate : new Date(startDate);
+
+      if (!endDate || isNaN(endDate.getTime())) {
         effectiveEndDate.setDate(effectiveEndDate.getDate() + 30);
       }
 
