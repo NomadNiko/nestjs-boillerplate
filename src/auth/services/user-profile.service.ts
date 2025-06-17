@@ -83,6 +83,21 @@ export class UserProfileService {
       }
     }
 
+    if (userDto.username && userDto.username !== currentUser.username) {
+      const userByUsername = await this.usersService.findByUsername(
+        userDto.username,
+      );
+
+      if (userByUsername && userByUsername.id !== currentUser.id) {
+        throw new UnprocessableEntityException({
+          status: HttpStatus.UNPROCESSABLE_ENTITY,
+          errors: {
+            username: 'usernameExists',
+          },
+        });
+      }
+    }
+
     if (userDto.email && userDto.email !== currentUser.email) {
       const userByEmail = await this.usersService.findByEmail(userDto.email);
 

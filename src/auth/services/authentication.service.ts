@@ -1,5 +1,6 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { AuthEmailLoginDto } from '../dto/auth-email-login.dto';
+import { AuthLoginDto } from '../dto/auth-login.dto';
 import { SocialInterface } from '../../social/interfaces/social.interface';
 import { LoginResponseDto } from '../dto/login-response.dto';
 import { JwtRefreshPayloadType } from '../strategies/types/jwt-refresh-payload.type';
@@ -19,6 +20,33 @@ export class AuthenticationService {
 
   async validateLogin(loginDto: AuthEmailLoginDto): Promise<LoginResponseDto> {
     const user = await this.loginService.validateEmailLogin(loginDto);
+
+    const session = await this.sessionService.create({
+      user,
+      hash: '',
+    });
+
+    const { token, refreshToken, tokenExpires, hash } =
+      await this.tokenService.generateTokens({
+        id: user.id,
+        role: user.role,
+        sessionId: session.id,
+      });
+
+    await this.sessionService.update(session.id, { hash });
+
+    return {
+      refreshToken,
+      token,
+      tokenExpires,
+      user,
+    };
+  }
+
+  async validateFlexibleLogin(
+    loginDto: AuthLoginDto,
+  ): Promise<LoginResponseDto> {
+    const user = await this.loginService.validateFlexibleLogin(loginDto);
 
     const session = await this.sessionService.create({
       user,

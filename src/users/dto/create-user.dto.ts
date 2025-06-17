@@ -23,6 +23,11 @@ export class CreateUserDto {
   @IsEmail()
   email: string | null;
 
+  @ApiPropertyOptional({ example: 'johndoe', type: String })
+  @IsOptional()
+  @Transform(lowerCaseTransformer)
+  username?: string | null;
+
   @ApiProperty()
   @MinLength(6)
   password?: string;

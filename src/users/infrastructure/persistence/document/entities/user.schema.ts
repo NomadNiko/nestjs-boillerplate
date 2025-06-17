@@ -23,6 +23,13 @@ export class UserSchemaClass extends EntityDocumentHelper {
   })
   email: string | null;
 
+  @Prop({
+    type: String,
+    unique: true,
+    sparse: true,
+  })
+  username?: string | null;
+
   @Prop()
   password?: string;
 

@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { AuthEmailLoginDto } from './dto/auth-email-login.dto';
+import { AuthLoginDto } from './dto/auth-login.dto';
 import { AuthUpdateDto } from './dto/auth-update.dto';
 import { AuthRegisterLoginDto } from './dto/auth-register-login.dto';
 import { SocialInterface } from '../social/interfaces/social.interface';
@@ -24,6 +25,12 @@ export class AuthService {
 
   async validateLogin(loginDto: AuthEmailLoginDto): Promise<LoginResponseDto> {
     return this.authenticationService.validateLogin(loginDto);
+  }
+
+  async validateFlexibleLogin(
+    loginDto: AuthLoginDto,
+  ): Promise<LoginResponseDto> {
+    return this.authenticationService.validateFlexibleLogin(loginDto);
   }
 
   async validateSocialLogin(

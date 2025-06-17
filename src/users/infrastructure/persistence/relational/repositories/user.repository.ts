@@ -83,6 +83,18 @@ export class UsersRelationalRepository implements UserRepository {
     return entity ? UserMapper.toDomain(entity) : null;
   }
 
+  async findByUsername(
+    username: User['username'],
+  ): Promise<NullableType<User>> {
+    if (!username) return null;
+
+    const entity = await this.usersRepository.findOne({
+      where: { username },
+    });
+
+    return entity ? UserMapper.toDomain(entity) : null;
+  }
+
   async findBySocialIdAndProvider({
     socialId,
     provider,

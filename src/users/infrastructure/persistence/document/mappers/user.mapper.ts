@@ -12,6 +12,7 @@ export class UserMapper {
     const domainEntity = new User();
     domainEntity.id = raw._id.toString();
     domainEntity.email = raw.email;
+    domainEntity.username = raw.username;
     domainEntity.password = raw.password;
     domainEntity.provider = raw.provider;
     domainEntity.socialId = raw.socialId;
@@ -68,6 +69,7 @@ export class UserMapper {
       persistenceSchema._id = domainEntity.id;
     }
     persistenceSchema.email = domainEntity.email;
+    persistenceSchema.username = domainEntity.username;
     persistenceSchema.password = domainEntity.password;
     persistenceSchema.provider = domainEntity.provider;
     persistenceSchema.socialId = domainEntity.socialId;

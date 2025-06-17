@@ -5,6 +5,7 @@ import {
 } from '@nestjs/common';
 import bcrypt from 'bcryptjs';
 import { AuthEmailLoginDto } from '../dto/auth-email-login.dto';
+import { AuthLoginDto } from '../dto/auth-login.dto';
 import { AuthProvidersEnum } from '../auth-providers.enum';
 import { SocialInterface } from '../../social/interfaces/social.interface';
 import { NullableType } from '../../utils/types/nullable.type';
@@ -34,6 +35,61 @@ export class LoginService {
         status: HttpStatus.UNPROCESSABLE_ENTITY,
         errors: {
           email: `needLoginViaProvider:${user.provider}`,
+        },
+      });
+    }
+
+    if (!user.password) {
+      throw new UnprocessableEntityException({
+        status: HttpStatus.UNPROCESSABLE_ENTITY,
+        errors: {
+          password: 'incorrectPassword',
+        },
+      });
+    }
+
+    const isValidPassword = await bcrypt.compare(
+      loginDto.password,
+      user.password,
+    );
+
+    if (!isValidPassword) {
+      throw new UnprocessableEntityException({
+        status: HttpStatus.UNPROCESSABLE_ENTITY,
+        errors: {
+          password: 'incorrectPassword',
+        },
+      });
+    }
+
+    return user;
+  }
+
+  async validateFlexibleLogin(loginDto: AuthLoginDto): Promise<User> {
+    // Determine if login is email or username
+    const isEmail = loginDto.login.includes('@');
+    let user: NullableType<User> = null;
+
+    if (isEmail) {
+      user = await this.usersService.findByEmail(loginDto.login);
+    } else {
+      user = await this.usersService.findByUsername(loginDto.login);
+    }
+
+    if (!user) {
+      throw new UnprocessableEntityException({
+        status: HttpStatus.UNPROCESSABLE_ENTITY,
+        errors: {
+          login: 'notFound',
+        },
+      });
+    }
+
+    if (user.provider !== AuthProvidersEnum.email) {
+      throw new UnprocessableEntityException({
+        status: HttpStatus.UNPROCESSABLE_ENTITY,
+        errors: {
+          login: `needLoginViaProvider:${user.provider}`,
         },
       });
     }

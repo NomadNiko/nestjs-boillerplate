@@ -37,6 +37,10 @@ export class UserReadService {
     return this.usersRepository.findByEmail(email);
   }
 
+  findByUsername(username: User['username']): Promise<NullableType<User>> {
+    return this.usersRepository.findByUsername(username);
+  }
+
   findBySocialIdAndProvider({
     socialId,
     provider,

@@ -14,6 +14,7 @@ import {
 import { AuthService } from './auth.service';
 import { ApiBearerAuth, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { AuthEmailLoginDto } from './dto/auth-email-login.dto';
+import { AuthLoginDto } from './dto/auth-login.dto';
 import { AuthForgotPasswordDto } from './dto/auth-forgot-password.dto';
 import { AuthConfirmEmailDto } from './dto/auth-confirm-email.dto';
 import { AuthResetPasswordDto } from './dto/auth-reset-password.dto';
@@ -43,6 +44,20 @@ export class AuthController {
   @HttpCode(HttpStatus.OK)
   public login(@Body() loginDto: AuthEmailLoginDto): Promise<LoginResponseDto> {
     return this.service.validateLogin(loginDto);
+  }
+
+  @SerializeOptions({
+    groups: ['me'],
+  })
+  @Post('login')
+  @ApiOkResponse({
+    type: LoginResponseDto,
+  })
+  @HttpCode(HttpStatus.OK)
+  public flexibleLogin(
+    @Body() loginDto: AuthLoginDto,
+  ): Promise<LoginResponseDto> {
+    return this.service.validateFlexibleLogin(loginDto);
   }
 
   @Post('email/register')

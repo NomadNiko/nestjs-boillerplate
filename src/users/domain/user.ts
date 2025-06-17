@@ -25,6 +25,12 @@ export class User {
   @Expose({ groups: ['me', 'admin'] })
   email: string | null;
 
+  @ApiProperty({
+    type: String,
+    example: 'johndoe',
+  })
+  username?: string | null;
+
   @Exclude({ toPlainOnly: true })
   password?: string;
 

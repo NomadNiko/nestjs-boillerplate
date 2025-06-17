@@ -15,6 +15,11 @@ export class UpdateUserDto extends PartialType(CreateUserDto) {
   @IsEmail()
   email?: string | null;
 
+  @ApiPropertyOptional({ example: 'johndoe', type: String })
+  @IsOptional()
+  @Transform(lowerCaseTransformer)
+  username?: string | null;
+
   @ApiPropertyOptional()
   @IsOptional()
   @MinLength(6)

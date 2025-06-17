@@ -19,6 +19,12 @@ export class AuthUpdateDto {
   @IsNotEmpty({ message: 'mustBeNotEmpty' })
   lastName?: string;
 
+  @ApiPropertyOptional({ example: 'johndoe' })
+  @IsOptional()
+  @IsNotEmpty({ message: 'mustBeNotEmpty' })
+  @Transform(lowerCaseTransformer)
+  username?: string;
+
   @ApiPropertyOptional({ example: 'new.email@example.com' })
   @IsOptional()
   @IsNotEmpty()
